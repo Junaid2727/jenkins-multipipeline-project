@@ -2,26 +2,47 @@ pipeline {
 
   agent any
 
-  options {
+    options {
 
-    buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')
 
-  }
-stages {
+	  }
 
-    stage('Hello') {
+	    stages {
 
-      steps {
+	        stage('Hello') {
 
-        sh '''
+		      steps {
 
-          java -version
+		              sh '''
 
-        '''
+			                java -version
 
-      }
+					        '''
 
-    }
-  }
+						      }
 
-}
+						          }
+
+							      stage('cat README') {
+
+							            when {
+
+								            branch "fix-*"
+
+									          }
+										    steps {
+
+										            sh '''
+
+											              cat README.md
+
+												              '''
+
+													            }
+
+														        }
+
+															  }
+
+															  }
